@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1013174526397",
+    "project_id": "login-register-group",
+    "storage_bucket": "login-register-group.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1013174526397:android:365ff2fdaa13a62653f2d4",
+        "android_client_info": {
+          "package_name": "vn.edu.usth.loginn"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD7f20F2U0hiFq5T0ttfthwuw28b1jNzuM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1013174526397:android:48c8b74f9f51170053f2d4",
+        "android_client_info": {
+          "package_name": "vn.edu.usth.testview"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD7f20F2U0hiFq5T0ttfthwuw28b1jNzuM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
