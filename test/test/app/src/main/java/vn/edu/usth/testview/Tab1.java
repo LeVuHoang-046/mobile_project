@@ -5,6 +5,8 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
@@ -16,18 +18,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.material.tabs.TabLayout;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import me.relex.circleindicator.CircleIndicator;
-import vn.edu.usth.testview.homepage.Cate;
-import vn.edu.usth.testview.homepage.CateAdapter;
+import vn.edu.usth.testview.homepage.Category;
 import vn.edu.usth.testview.homepage.Photo;
 import vn.edu.usth.testview.homepage.PhotoAdapter;
 import vn.edu.usth.testview.homepage.Sale;
 import vn.edu.usth.testview.homepage.SaleAdapter;
+import vn.edu.usth.testview.order.CategoryHomePageViewpageAdapter;
+import vn.edu.usth.testview.widget.CustomViewPager;
 
 
 public class Tab1 extends Fragment {
@@ -35,14 +40,9 @@ public class Tab1 extends Fragment {
     private CircleIndicator circleIndicator;
     private PhotoAdapter photoAdapter;
     private List<Photo> mlistPhoto;
-    private RecyclerView rcvDataCate;
-    private CateAdapter cateAdapter;
 
     private RecyclerView rcvDataSale;
     private SaleAdapter saleAdapter;
-
-
-
     private Timer mTimer;
 
     @SuppressLint("MissingInflatedId")
@@ -50,14 +50,6 @@ public class Tab1 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_tab1, container, false);
-        rcvDataCate = view.findViewById(R.id.rcv_cate_homepage);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false);
-        rcvDataCate.setLayoutManager(linearLayoutManager);
-
-
-        cateAdapter = new CateAdapter(requireContext(), getListUser());
-        rcvDataCate.setAdapter(cateAdapter);
-
         rcvDataSale = view.findViewById(R.id.rcv_sale_homepage);
         LinearLayoutManager linearLayoutManagerSale = new LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false);
         rcvDataSale.setLayoutManager(linearLayoutManagerSale);
@@ -76,9 +68,10 @@ public class Tab1 extends Fragment {
 
         circleIndicator.setViewPager(viewPager);
         photoAdapter.registerDataSetObserver(circleIndicator.getDataSetObserver());
-        return view;
 
+        return view;
     }
+
 
 
 
@@ -89,24 +82,8 @@ public class Tab1 extends Fragment {
         list.add(new Photo(R.drawable.slideimg3));
         return list;
     }
-    private List<Cate> getListUser() {
-        List<Cate> list = new ArrayList<>();
-        list.add(new Cate(R.drawable.dish, "FastFood"));
-        list.add(new Cate(R.drawable.pizza, "pizza"));
-        list.add(new Cate(R.drawable.chicken, "Chicken"));
-        list.add(new Cate(R.drawable.vegetables, "Vegetables" ));
-        list.add(new Cate(R.drawable.foodcate1, "Rice Chicken" ));
-        list.add(new Cate(R.drawable.friedegg, "Egg" ));
-        list.add(new Cate(R.drawable.meat, "Meat" ));
-        list.add(new Cate(R.drawable.hamburger, "Burger" ));
-        list.add(new Cate(R.drawable.seafood, "Seafood" ));
-        list.add(new Cate(R.drawable.sushi, "Sushi" ));
-        list.add(new Cate(R.drawable.tok, "Tokbokki" ));
 
 
-
-        return list;
-    }
     private List<Sale> getListSale1(){
         List<Sale> list1 = new ArrayList<>();
         list1.add(new Sale(R.drawable.sale1,"Tiếp Sức 'Mùa Sale' Giảm 40%"));
@@ -157,9 +134,6 @@ public class Tab1 extends Fragment {
         if (mTimer != null){
             mTimer.cancel();
             mTimer = null;
-        }
-        if(cateAdapter != null){
-            cateAdapter.release();
         }
         if (saleAdapter!=null){
             saleAdapter.release();
